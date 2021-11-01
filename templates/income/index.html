@@ -1,0 +1,46 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+    {% include '../partials/messages.html' %}
+     <div class="card mb-3">
+        <nav aria-label="breadcrumb">
+            <div class="card-body">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Income</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <a href="{% url 'add_income' %}" class="btn btn-success mb-4">Add Income</a>
+        </div>
+        <div class="col-md-4">
+            <input type="text" placeholder="Search" class="form-control" id="search_income">
+        </div>
+    </div>
+    <table class="table table-hover">
+         <thead>
+            <tr>
+                <th scope="col">Amount ({{currency}})</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody id="income-rows">
+            {% for income in Incomes %}
+            <tr>
+                <th>{{income.amount}}</th>
+                <td>{{income.description}}</td>
+                <td>{{income.category}}</td>
+                <td>{{income.date}}</td>
+                <td><a href="{% url 'edit_income' income.pk %}" class="btn btn-warning btn-sm">Edit</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="{% static 'js/searchIncome.js'%}"></script>
+{% endblock  %}

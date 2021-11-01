@@ -1,0 +1,50 @@
+{% extends '../base.html' %}
+{% block content %}
+
+    <div class="card mb-5">
+        <nav aria-label="breadcrumb">
+            <div class="card-body">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Income</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {% include '../partials/messages.html' %}
+            <form action="{% url 'edit_income' income.pk %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="">Amount</label>
+                    <input type="text" value="{{income.amount}}" class="form-control form-control-sm" name="amount">
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Description</label>
+                    <input type="text" value="{{income.description}}"  class="form-control form-control-sm" name="description">
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Category</label>
+                    <select class="form-control form-control-sm" name="category" value={{expenses.category}}>
+                    {% for category in categories %}
+                        {% if category.name == income.category %}
+                            <Option selected>{{category.name}}</Option>
+                        {% else %}
+                            <Option>{{category.name}}</Option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Date</label>
+                    <input type="date" value="{{income.date|date:"Y-m-d"}}" class="form-control form-control-sm" name="date">
+                </div>
+                <button class="btn btn-success mt-4">Edit Income</button>
+                <a href="{% url 'delete_income' income.pk %}" onclick="return confirm('are you sure?');" class="btn btn-danger mt-4">Delete Expense</a>
+            </form>
+        </div>
+    </div>
+   
+{% endblock  %}

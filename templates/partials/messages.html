@@ -1,0 +1,5 @@
+{% if messages %}
+    {% for massage in messages %}
+        <div class="alert text-center alert-{{massage.tags}}" role="alert">{{massage}}</div>
+    {% endfor %}
+{% endif %}

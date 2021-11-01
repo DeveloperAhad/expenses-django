@@ -1,0 +1,45 @@
+{% extends '../base.html' %}
+{% block content %}
+
+    <div class="card mb-5">
+        <nav aria-label="breadcrumb">
+            <div class="card-body">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {% include '../partials/messages.html' %}
+            <form action="{% url 'add_income' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="">Amount</label>
+                    <input type="text" value="{{value.amount}}" class="form-control form-control-sm" name="amount">
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Description</label>
+                    <input type="text" value="{{value.description}}"  class="form-control form-control-sm" name="description">
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Category</label>
+                    <select class="form-control form-control-sm" name="category">
+                    {% for category in categories %}
+                        <Option>{{category.name}}</Option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label mt-4" for="">Date</label>
+                    <input type="date" value="{{value.date}}" class="form-control form-control-sm" name="date">
+                </div>
+                <button class="btn btn-success mt-4">Add Expense</button>
+            </form>
+        </div>
+    </div>
+   
+{% endblock  %}

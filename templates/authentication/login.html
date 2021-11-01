@@ -1,0 +1,24 @@
+{% extends 'base_auth.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+        <h3 class="py-4 text-center">Login</h3>
+            {% include '../partials/messages.html' %}
+            <form method="post" class="">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="username" id="username">
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="password" id="password" autocomplete="on">
+                    <label for="password">Password</label>
+                    <small id="password-handler" class="float-right pt-2">Show</small>
+                </div>
+                <button class="btn btn-primary mb-4">Login</button>
+                <h6 class="text-center">Don't have an account? <a href="{% url 'register' %}">Register</a></h6>
+                <h6 class="text-center">Forgate password? <a href="{% url 'forgate_password' %}">Reset</a></h6>
+            </form>
+        </div>
+   </div>
+{% endblock  %}

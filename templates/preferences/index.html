@@ -1,0 +1,18 @@
+{% extends '../base.html' %}
+{% block content %}
+    {% include '../partials/messages.html' %}
+    <h4 class="mb-3">Currency</h4>
+    <form method="post">
+    {% csrf_token %}
+        <div class="input-group">
+            <select class="form-select" name="currencie">
+                <option>Choose...</option>
+                {% for currencie in currencies %}
+                    <option {% if selected_currency == currencie.name %} selected {% endif %} value="{{currencie.value}}-{{currencie.name}}">{{currencie.value}} - {{currencie.name}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Save Currency</button>
+        </div>
+    </form>
+   
+{% endblock  %}

@@ -1,0 +1,30 @@
+{% extends 'base_auth.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+        <h3 class="py-4 text-center">Register for a free account</h3>
+            {% include '../partials/messages.html' %}
+            <form method="post" class="">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" value={{fileValues.username}}>
+                    <label for="username">Username</label>
+                    <div class="invalid-feedback" id="username-check-msg">Please enter a message in the textarea.</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" value={{fileValues.email}}>
+                    <label for="email">Email address</label>
+                    <div class="invalid-feedback" id="email-check-msg">Please enter a message in the textarea.</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="name@example.com" autocomplete="on">
+                    <label for="password">Password</label>
+                    <small id="password-handler" class="float-right pt-2">Show</small>
+                </div>
+                <button class="btn btn-primary mb-4">Register</button>
+                <h6 class="text-center">Do you have an account? <a href="{% url 'login' %}">Login</a></h6>
+                <h6 class="text-center">Forgate password? <a href="{% url 'forgate_password' %}">Reset</a></h6>
+            </form>
+        </div>
+   </div>
+{% endblock  %}

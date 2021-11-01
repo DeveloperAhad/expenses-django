@@ -1,0 +1,46 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+    {% include '../partials/messages.html' %}
+     <div class="card mb-3">
+        <nav aria-label="breadcrumb">
+            <div class="card-body">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <a href="{% url 'add_expenses' %}" class="btn btn-success mb-4">Add Expenses</a>
+        </div>
+        <div class="col-md-4">
+            <input type="text" placeholder="Search" class="form-control" id="search_expenses">
+        </div>
+    </div>
+    <table class="table table-hover">
+         <thead>
+            <tr>
+                <th scope="col">Amount ({{currency}})</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody id="expenses-rows">
+            {% for expense in expenses %}
+            <tr>
+                <th>{{expense.amount}}</th>
+                <td>{{expense.description}}</td>
+                <td>{{expense.category}}</td>
+                <td>{{expense.date}}</td>
+                <td><a href="{% url 'edit_expenses' expense.pk %}" class="btn btn-warning btn-sm">Edit</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="{% static 'js/searchExpenses.js'%}"></script>
+{% endblock  %}
